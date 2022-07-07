@@ -25,34 +25,15 @@ class Item:
     def apply_disccount(self):
         self.price = self.price * Item.pay_rate
 
-# tostring common method
+    # class method
+    @classmethod
+    def instantiate_from_csv(self):
+        pass
+
+    # tostring common method
     def __repr__(self):
         return f"Item ('{self.name}', {self.price}, {self.quantity})"
 
 
-# item1 = Item("Phone",100,1)
-
-# item1.apply_disccount()
-# print(item1.price)
-
-# item2 = Item("Laptop",50,5)
-
-# item2.price = 1000
-# item2.quantity = 3
-
-# print(item1.calculate_total_price())
-# print(item2.calculate_total_price())
-
-# print(Item.__dict__) # All tha attributes for class level
-# print(item1.__dict__) # All the attributes for instance level
-
-item1 = Item("Phone",100,1)
-item2 = Item("Laptop",1000,3)
-item3 = Item("Cable",10,5)
-item4 = Item("Mouse",50,5)
-item5 = Item("Keyboard",75,5)
-
-# for instance in Item.all:
-#     print(instance.name)
-
-print(Item.all)
+    # calling a class method from the class level only
+    Item.instantiate_from_csv()
