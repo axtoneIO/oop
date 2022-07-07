@@ -1,3 +1,5 @@
+from ast import Try
+import csv
 from pkgutil import iter_modules
 from random import random
 
@@ -27,13 +29,32 @@ class Item:
 
     # class method
     @classmethod
-    def instantiate_from_csv(self):
-        pass
+    def instantiate_from_csv(cls):
+        with open('items.csv','r') as f:
+            reader = csv.DictReader(f)
+            items = list(reader)
+        
+        for item in items:
+            Item(
+                name=item.get('name'),
+                price=int(item.get('price')),
+                quantity=int(item.get('quantity'))
+            )
+
+    @staticmethod
+    def is_integer(num):
+        # We will count out the floats that are point zero
+        # For i.e: 5.0, 10.0
+        if isinstance(num, float):
+            return num.is_integer()
+        elif isinstance(num,int):
+            return True
+        else:
+            return False
 
     # tostring common method
     def __repr__(self):
         return f"Item ('{self.name}', {self.price}, {self.quantity})"
 
 
-    # calling a class method from the class level only
-    Item.instantiate_from_csv()
+print(Item.is_integer(7.5))
